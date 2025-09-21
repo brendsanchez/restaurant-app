@@ -1,19 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.dusk.restaurant.LoginController">
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<StackPane fx:id="rootPane" xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.dusk.restaurant.LoginController"
+           prefWidth="1200" prefHeight="700">
 
-    <Label text="Iniciar Sesión"/>
-    <TextField fx:id="txtUsername" promptText="Usuario"/>
-    <PasswordField fx:id="txtPassword" promptText="Contraseña"/>
-    <HBox spacing="10">
-        <Button text="Ingresar" onAction="#handleLogin" styleClass="btn-primary"/>
-        <Button text="Registrarse" onAction="#goToRegister" styleClass="btn-danger"/>
-    </HBox>
-</VBox>
+    <!-- Imagen de fondo -->
+    <ImageView fx:id="backgroundImage" fitWidth="1200" fitHeight="700">
+        <Image url="@/restaurant.jpg"/>
+    </ImageView>
+
+    <!-- Panel izquierdo: Login -->
+    <VBox fx:id="loginContainer" alignment="CENTER_LEFT" spacing="15" styleClass="login-container"
+          prefWidth="350" maxWidth="400">
+        <padding>
+            <Insets top="40" right="40" bottom="40" left="40"/>
+        </padding>
+        <Label text="Bienvenido" styleClass="title"/>
+
+        <!-- Campos -->
+        <TextField fx:id="usernameField" promptText="Usuario" styleClass="text-field"/>
+        <PasswordField fx:id="passwordField" promptText="Contraseña" styleClass="password-field"/>
+
+        <!-- Botones -->
+        <VBox spacing="10" alignment="CENTER">
+            <Button fx:id="loginButton" text="Iniciar Sesión" styleClass="button login-button"/>
+            <Button fx:id="registerButton" text="Registrarse" styleClass="button register-button"/>
+        </VBox>
+
+        <!-- Link de recuperación -->
+        <Label text="Olvidé mi contraseña" styleClass="link-label"/>
+    </VBox>
+
+</StackPane>

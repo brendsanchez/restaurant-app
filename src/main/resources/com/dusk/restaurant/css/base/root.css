@@ -1,0 +1,11 @@
+.root {
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    -fx-background-color: #fdd835; /* amarillo cálido */
+}
+
+/* Sección izquierda */
+.left-pane {
+    -fx-background-color: #fdd835;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);
+    -fx-pref-width: 400px;
+}

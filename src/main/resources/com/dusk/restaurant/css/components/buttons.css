@@ -1,0 +1,13 @@
+.login-button {
+    -fx-background-color: #f44336; /* rojo fuerte */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-width: 250px;
+    -fx-pref-height: 40px;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.login-button:hover {
+    -fx-background-color: #d32f2f;
+}

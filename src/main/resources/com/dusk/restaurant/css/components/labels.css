@@ -1,0 +1,6 @@
+.link-label {
+    -fx-text-fill: #2575fc;
+    -fx-font-size: 12px;
+    -fx-underline: true;
+    -fx-cursor: hand;
+}

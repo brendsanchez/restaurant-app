@@ -24,7 +24,7 @@ public class App extends javafx.application.Application {
     }
 
     static void addStyles() {
-        var internalStyles = Objects.requireNonNull(App.class.getResource("css/styles.css"))
+        var internalStyles = Objects.requireNonNull(App.class.getResource("css/index.css"))
                 .toExternalForm();
 
         scene.getStylesheets().add(internalStyles);
