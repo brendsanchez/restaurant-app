@@ -1,5 +1,6 @@
 package com.dusk.restaurant.util;
 
+import com.dusk.restaurant.App;
 import com.dusk.restaurant.exception.GenericException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

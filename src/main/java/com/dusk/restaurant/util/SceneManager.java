@@ -35,8 +35,8 @@ public class SceneManager {
     }
 
     private void addStyles() {
-        var indexCss = ResourceUtil.getResource("css/index.css");
-        this.scene.getStylesheets().add(indexCss.toExternalForm());
+        var indexCss = ResourceUtil.getResourceFrom("css/index.css");
+        this.scene.getStylesheets().add(indexCss);
     }
 
     // Cambiar la raíz de la escena
