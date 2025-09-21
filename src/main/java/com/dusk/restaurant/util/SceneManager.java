@@ -45,11 +45,7 @@ public class SceneManager {
 
     // Cambiar la raíz de la escena
     public void setRoot(String fxml) {
-        try {
-            scene.setRoot(FXMLUtils.loadFXML(fxml));
-        } catch (IOException e) {
-            System.out.println("not found fxml: " + fxml);
-        }
+        scene.setRoot(FXMLUtils.loadFXML(fxml));
     }
 
 }
