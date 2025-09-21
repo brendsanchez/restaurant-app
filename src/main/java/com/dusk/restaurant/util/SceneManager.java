@@ -1,14 +1,10 @@
 package com.dusk.restaurant.util;
 
-import com.dusk.restaurant.App;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.io.IOException;
-import java.util.Objects;
 
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
@@ -26,9 +22,9 @@ public class SceneManager {
     }
 
     // Inicializar el Stage principal (una vez al arrancar la app)
-    public void init(Stage stage, String fxml) throws IOException {
+    public void init(Stage stage, String fxml) {
         this.primaryStage = stage;
-        Parent root = FXMLUtils.loadFXML(fxml);
+        Parent root = FXMLUtil.loadFXML(fxml);
         this.scene = new Scene(root);
 
         this.addStyles();
@@ -39,13 +35,13 @@ public class SceneManager {
     }
 
     private void addStyles() {
-        var indexCss = Objects.requireNonNull(App.class.getResource("css/index.css"));
+        var indexCss = ResourceUtil.getResource("css/index.css");
         this.scene.getStylesheets().add(indexCss.toExternalForm());
     }
 
     // Cambiar la raíz de la escena
     public void setRoot(String fxml) {
-        scene.setRoot(FXMLUtils.loadFXML(fxml));
+        scene.setRoot(FXMLUtil.loadFXML(fxml));
     }
 
 }
