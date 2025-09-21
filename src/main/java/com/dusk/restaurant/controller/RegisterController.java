@@ -2,9 +2,14 @@ package com.dusk.restaurant.controller;
 
 import com.dusk.restaurant.util.SceneManager;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import net.synedra.validatorfx.Validator;
 
 import java.io.IOException;
@@ -19,8 +24,26 @@ public class RegisterController {
 
     private Validator validator;
 
+
+    @FXML
+    private ImageView backgroundImage;
+
+    @FXML
+    private StackPane rootPane;
+
+    @FXML
+    private VBox registerContainer;
+
+    @FXML
+    private Label welcomeText;
+
     @FXML
     public void initialize() {
+        backgroundImage.fitWidthProperty().bind(rootPane.widthProperty());
+        backgroundImage.fitHeightProperty().bind(rootPane.heightProperty());
+
+        // Alinear el login a la izquierda del StackPane
+        StackPane.setAlignment(registerContainer, Pos.CENTER_LEFT);
 
         validator = new Validator();
 

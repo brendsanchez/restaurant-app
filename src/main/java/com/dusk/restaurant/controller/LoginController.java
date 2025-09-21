@@ -35,11 +35,6 @@ public class LoginController {
     }
 
     @FXML
-    protected void handleLogin() {
-        welcomeText.setText("go to site");
-    }
-
-    @FXML
     protected void goToRegister() throws IOException {
         SceneManager.getInstance().setRoot("RegisterView");
     }
