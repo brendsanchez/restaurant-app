@@ -1,7 +1,6 @@
 package com.dusk.restaurant.util;
 
 import com.dusk.restaurant.App;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -29,7 +28,7 @@ public class SceneManager {
     // Inicializar el Stage principal (una vez al arrancar la app)
     public void init(Stage stage, String fxml) throws IOException {
         this.primaryStage = stage;
-        Parent root = loadFXML(fxml);
+        Parent root = FXMLUtils.loadFXML(fxml);
         this.scene = new Scene(root);
 
         this.addStyles();
@@ -40,22 +39,17 @@ public class SceneManager {
     }
 
     private void addStyles() {
-        var internalStyles = Objects.requireNonNull(App.class.getResource("css/index.css"))
-                .toExternalForm();
-
-        this.scene.getStylesheets().add(internalStyles);
-    }
-
-    // Cargar un FXML
-    private Parent loadFXML(String fxml) throws IOException {
-        var fileName = "fxml/" + fxml + ".fxml";
-        var fxmlLoader = new FXMLLoader(App.class.getResource(fileName));
-        return fxmlLoader.load();
+        var indexCss = Objects.requireNonNull(App.class.getResource("css/index.css"));
+        this.scene.getStylesheets().add(indexCss.toExternalForm());
     }
 
     // Cambiar la raíz de la escena
-    public void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+    public void setRoot(String fxml) {
+        try {
+            scene.setRoot(FXMLUtils.loadFXML(fxml));
+        } catch (IOException e) {
+            System.out.println("not found fxml: " + fxml);
+        }
     }
 
 }
