@@ -1,5 +1,6 @@
-package com.dusk.restaurant;
+package com.dusk.restaurant.controller;
 
+import com.dusk.restaurant.util.SceneManager;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -40,6 +41,6 @@ public class LoginController {
 
     @FXML
     protected void goToRegister() throws IOException {
-        App.setRoot("RegisterView");
+        SceneManager.getInstance().setRoot("RegisterView");
     }
 }

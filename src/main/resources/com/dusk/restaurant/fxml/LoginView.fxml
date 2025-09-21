@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <StackPane fx:id="rootPane" xmlns:fx="http://javafx.com/fxml"
-           fx:controller="com.dusk.restaurant.LoginController"
+           fx:controller="com.dusk.restaurant.controller.LoginController"
            prefWidth="1200" prefHeight="700">
 
     <!-- Imagen de fondo -->

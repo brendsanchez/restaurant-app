@@ -1,10 +1,10 @@
-package com.dusk.restaurant;
+package com.dusk.restaurant.controller;
 
+import com.dusk.restaurant.util.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import net.synedra.validatorfx.Validator;
 
 import java.io.IOException;
@@ -67,6 +67,6 @@ public class RegisterController {
 
     @FXML
     protected void goToLogin() throws IOException {
-        App.setRoot("LoginView");
+        SceneManager.getInstance().setRoot("LoginView");
     }
 }
