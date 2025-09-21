@@ -13,7 +13,7 @@
     <TextField fx:id="txtUsername" promptText="Usuario"/>
     <PasswordField fx:id="txtPassword" promptText="Contraseña"/>
     <HBox spacing="10">
-        <Button text="Ingresar" onAction="#handleLogin"/>
-        <Button text="Registrarse" onAction="#goToRegister"/>
+        <Button text="Ingresar" onAction="#handleLogin" styleClass="btn-primary"/>
+        <Button text="Registrarse" onAction="#goToRegister" styleClass="btn-danger"/>
     </HBox>
 </VBox>

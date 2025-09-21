@@ -6,8 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
-import static org.kordamp.bootstrapfx.BootstrapFX.bootstrapFXStylesheet;
+import java.util.Objects;
 
 public class App extends javafx.application.Application {
 
@@ -16,7 +15,7 @@ public class App extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("LoginView"), 320, 240);
-        scene.getStylesheets().add(bootstrapFXStylesheet());
+        addStyles();
 
         stage.setTitle("Hello!");
         stage.setScene(scene);
@@ -24,12 +23,20 @@ public class App extends javafx.application.Application {
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException{
+    static void addStyles() {
+        var internalStyles = Objects.requireNonNull(App.class.getResource("css/styles.css"))
+                .toExternalForm();
+
+        scene.getStylesheets().add(internalStyles);
+    }
+
+    static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        var fileName = "fxml/" + fxml + ".fxml";
+        var fxmlLoader = new FXMLLoader(App.class.getResource(fileName));
         return fxmlLoader.load();
     }
 
