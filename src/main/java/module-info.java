@@ -1,4 +1,6 @@
 module com.dusk.restaurant {
+    requires static lombok;
+
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -8,10 +10,13 @@ module com.dusk.restaurant {
 
     requires org.kordamp.ikonli.javafx;
     requires java.logging;
-    requires static lombok;
+    requires java.net.http;
+    requires com.fasterxml.jackson.databind;
 
-    opens com.dusk.restaurant to javafx.fxml;
     exports com.dusk.restaurant;
     exports com.dusk.restaurant.controller;
+    exports com.dusk.restaurant.dto;
+
+    opens com.dusk.restaurant to javafx.fxml;
     opens com.dusk.restaurant.controller to javafx.fxml;
 }

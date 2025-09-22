@@ -1,16 +1,18 @@
 package com.dusk.restaurant.controller;
 
+import com.dusk.restaurant.service.LoginService;
 import com.dusk.restaurant.util.SceneManager;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
-
 public class LoginController {
+
+    private final LoginService loginService = new LoginService();
 
     @FXML
     private ImageView backgroundImage;
@@ -22,7 +24,10 @@ public class LoginController {
     private VBox loginContainer;
 
     @FXML
-    private Label welcomeText;
+    private TextField usernameField;
+
+    @FXML
+    private PasswordField passwordField;
 
     @FXML
     public void initialize() {
@@ -35,7 +40,16 @@ public class LoginController {
     }
 
     @FXML
-    protected void goToRegister() throws IOException {
+    protected void goToRegister() {
         SceneManager.getInstance().setRoot("RegisterView");
+    }
+
+    @FXML
+    protected void handleLogin() {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+
+        var alertDto = this.loginService.login(username, password);
+        alertDto.getAlert().showAndWait();
     }
 }

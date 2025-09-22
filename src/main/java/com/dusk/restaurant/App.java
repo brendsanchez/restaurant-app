@@ -3,12 +3,10 @@ package com.dusk.restaurant;
 import com.dusk.restaurant.util.SceneManager;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class App extends javafx.application.Application {
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         SceneManager.getInstance().init(stage, "LoginView");
     }
 

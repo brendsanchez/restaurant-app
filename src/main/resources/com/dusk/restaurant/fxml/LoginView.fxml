@@ -32,8 +32,9 @@
 
         <!-- Botones -->
         <VBox spacing="10" alignment="CENTER">
-            <Button fx:id="loginButton" text="Iniciar Sesión" styleClass="button login-button"/>
-            <Button fx:id="registerButton" text="Registrarse" styleClass="button register-button" onAction="#goToRegister"/>
+            <Button fx:id="loginButton" text="Iniciar Sesión" styleClass="button login-button" onAction="#handleLogin"/>
+            <Button fx:id="registerButton" text="Registrarse" styleClass="button register-button"
+                    onAction="#goToRegister"/>
         </VBox>
 
         <!-- Link de recuperación -->
