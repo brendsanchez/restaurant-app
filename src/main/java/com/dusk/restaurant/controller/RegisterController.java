@@ -12,8 +12,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import net.synedra.validatorfx.Validator;
 
-import java.io.IOException;
-
 public class RegisterController {
 
     @FXML
@@ -75,7 +73,7 @@ public class RegisterController {
     }
 
     @FXML
-    private void handleRegister() throws IOException {
+    private void handleRegister() {
         // Ejecutar la validación
         if (validator.validate()) {
             // Si pasa la validación
@@ -89,7 +87,7 @@ public class RegisterController {
     }
 
     @FXML
-    protected void goToLogin() throws IOException {
+    protected void goToLogin() {
         SceneManager.getInstance().setRoot("LoginView");
     }
 }

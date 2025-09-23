@@ -1,6 +1,6 @@
 package com.dusk.restaurant.controller;
 
-import com.dusk.restaurant.service.LoginService;
+import com.dusk.restaurant.service.UserService;
 import com.dusk.restaurant.util.SceneManager;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 
 public class LoginController {
 
-    private final LoginService loginService = new LoginService();
+    private final UserService userService = new UserService();
 
     @FXML
     private ImageView backgroundImage;
@@ -49,7 +49,7 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        var alertDto = this.loginService.login(username, password);
+        var alertDto = this.userService.login(username, password);
         alertDto.getAlert().showAndWait();
     }
 }

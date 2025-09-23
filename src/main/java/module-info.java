@@ -19,4 +19,7 @@ module com.dusk.restaurant {
 
     opens com.dusk.restaurant to javafx.fxml;
     opens com.dusk.restaurant.controller to javafx.fxml;
+    exports com.dusk.restaurant.util;
+    exports com.dusk.restaurant.client;
+    exports com.dusk.restaurant.client.dto;
 }

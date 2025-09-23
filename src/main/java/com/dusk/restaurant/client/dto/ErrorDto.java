@@ -1,4 +1,4 @@
-package com.dusk.restaurant.dto;
+package com.dusk.restaurant.client.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginDto {
-    private String username;
-    private String password;
+public class ErrorDto {
+    private String message;
+    private int statusCode;
 }
