@@ -12,6 +12,7 @@ module com.dusk.restaurant {
     requires java.logging;
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
+    requires java.prefs;
 
     exports com.dusk.restaurant;
     exports com.dusk.restaurant.controller;

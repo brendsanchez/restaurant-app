@@ -16,11 +16,13 @@ public class RestClient {
     private final HttpClient client;
     private final ObjectMapper objectMapper;
     private final String baseUrl;
+    private final String apiKey;
 
     private RestClient() {
         this.client = HttpClient.newHttpClient();
         this.objectMapper = new ObjectMapper();
         this.baseUrl = this.getBaseUrl();
+        this.apiKey = this.getApiKey();
     }
 
     public static RestClient getInstance() {
@@ -36,7 +38,19 @@ public class RestClient {
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create(this.baseUrl + endpoint))
                 .header("Content-Type", "application/json")
+                .header("X-API-Key", this.apiKey)
                 .POST(HttpRequest.BodyPublishers.ofString(json))
+                .build();
+
+        return this.getResult(classResponse, httpRequest);
+    }
+
+    public <T, R> Result<R> get(String endpoint, Class<R> classResponse) {
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create(this.baseUrl + endpoint))
+                .header("Content-Type", "application/json")
+                .header("X-API-Key", this.apiKey)
+                .GET()
                 .build();
 
         return this.getResult(classResponse, httpRequest);
@@ -76,6 +90,14 @@ public class RestClient {
         String url = System.getenv("API_BASE_URL");
         if (url == null || url.isBlank()) {
             throw new GenericException("No se encontro el env para la base url");
+        }
+        return url;
+    }
+
+    private String getApiKey() {
+        String url = System.getenv("API_KEY_VALUE");
+        if (url == null || url.isBlank()) {
+            throw new GenericException("No se encontro el api key value");
         }
         return url;
     }
