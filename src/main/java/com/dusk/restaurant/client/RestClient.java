@@ -81,7 +81,6 @@ public class RestClient {
         try {
             return this.objectMapper.writeValueAsString(dto);
         } catch (JsonProcessingException e) {
-            e.fillInStackTrace();
             throw new GenericException("error dto parse to json");
         }
     }
