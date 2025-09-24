@@ -11,65 +11,48 @@ public class UserService {
     public AlertDto login(String username, String password) {
         var userDto = this.getUserDto(username, password);
 
-        try {
-            var loginResponse = RestClient.getInstance().post(
-                    "/api/login",
-                    userDto,
-                    UserResponse.class
-            );
+        var loginResponse = RestClient.getInstance().post(
+                "/api/login",
+                userDto,
+                UserResponse.class
+        );
 
-            if (loginResponse.isErr()) {
-                return AlertDto.builder()
-                        .type(Alert.AlertType.ERROR)
-                        .title("Login fallido")
-                        .message(loginResponse.getErrorDto().getMessage())
-                        .build();
-            }
-
+        if (loginResponse.isErr()) {
             return AlertDto.builder()
-                    .type(Alert.AlertType.INFORMATION)
-                    .title("Login exitoso")
-                    .message("¡Bienvenido!")
+                    .type(Alert.AlertType.ERROR)
+                    .title("Login fallido")
+                    .message(loginResponse.getErrorDto().getMessage())
                     .build();
-        } catch (Exception e) {
-            return this.getAlertDtoError(e, "Login");
         }
+
+        return AlertDto.builder()
+                .type(Alert.AlertType.INFORMATION)
+                .title("Login exitoso")
+                .message("¡Bienvenido!")
+                .build();
     }
 
     public AlertDto register(String username, String password) {
         var userDto = this.getUserDto(username, password);
 
-        try {
-            var registerResponse = RestClient.getInstance().post(
-                    "/api/register",
-                    userDto,
-                    UserResponse.class
-            );
+        var registerResponse = RestClient.getInstance().post(
+                "/api/register",
+                userDto,
+                UserResponse.class
+        );
 
-            if (registerResponse.isErr()) {
-                return AlertDto.builder()
-                        .type(Alert.AlertType.ERROR)
-                        .title("Register fallido")
-                        .message(registerResponse.getErrorDto().getMessage())
-                        .build();
-            }
-
+        if (registerResponse.isErr()) {
             return AlertDto.builder()
-                    .type(Alert.AlertType.INFORMATION)
-                    .title("Register exitoso")
-                    .message("¡Creacion de usuario existosamente!")
+                    .type(Alert.AlertType.ERROR)
+                    .title("Register fallido")
+                    .message(registerResponse.getErrorDto().getMessage())
                     .build();
-        } catch (Exception e) {
-            return this.getAlertDtoError(e, "Reister");
         }
-    }
 
-    private AlertDto getAlertDtoError(Exception e, String from) {
-        System.out.println(e.getMessage());
         return AlertDto.builder()
-                .type(Alert.AlertType.ERROR)
-                .title(from + " fallido")
-                .message("Error Internal Conexion " + from)
+                .type(Alert.AlertType.INFORMATION)
+                .title("Register exitoso")
+                .message("¡Creacion de usuario existosamente!")
                 .build();
     }
 

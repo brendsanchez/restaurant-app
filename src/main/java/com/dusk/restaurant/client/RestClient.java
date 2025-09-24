@@ -2,9 +2,9 @@ package com.dusk.restaurant.client;
 
 import com.dusk.restaurant.client.dto.ErrorDto;
 import com.dusk.restaurant.exception.GenericException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -30,10 +30,8 @@ public class RestClient {
         return instance;
     }
 
-    public <T, R> Result<R> post(String endpoint, T dto, Class<R> classResponse)
-            throws IOException, InterruptedException {
-
-        String json = this.objectMapper.writeValueAsString(dto);
+    public <T, R> Result<R> post(String endpoint, T dto, Class<R> classResponse) {
+        String json = this.getJson(dto);
 
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create(this.baseUrl + endpoint))
@@ -44,18 +42,33 @@ public class RestClient {
         return this.getResult(classResponse, httpRequest);
     }
 
-    private <R> Result<R> getResult(Class<R> classResponse, HttpRequest httpRequest)
-            throws IOException, InterruptedException {
+    private <R> Result<R> getResult(Class<R> classResponse, HttpRequest httpRequest) {
+        try {
+            HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-        HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-        int status = response.statusCode();
-        if (status >= 200 && status < 300) {
-            R body = this.objectMapper.readValue(response.body(), classResponse);
-            return Result.ok(body);
-        } else {
-            var errorDto = this.objectMapper.readValue(response.body(), ErrorDto.class);
+            int status = response.statusCode();
+            if (status >= 200 && status < 300) {
+                R body = this.objectMapper.readValue(response.body(), classResponse);
+                return Result.ok(body);
+            } else {
+                var errorDto = this.objectMapper.readValue(response.body(), ErrorDto.class);
+                return Result.err(errorDto);
+            }
+        } catch (Exception e) {
+            e.fillInStackTrace();
+            var errorDto = ErrorDto.builder()
+                    .message("Error llamado externo")
+                    .build();
             return Result.err(errorDto);
+        }
+    }
+
+    private <T> String getJson(T dto) {
+        try {
+            return this.objectMapper.writeValueAsString(dto);
+        } catch (JsonProcessingException e) {
+            e.fillInStackTrace();
+            throw new GenericException("error dto parse to json");
         }
     }
 
