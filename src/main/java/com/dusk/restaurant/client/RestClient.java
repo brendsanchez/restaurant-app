@@ -2,7 +2,6 @@ package com.dusk.restaurant.client;
 
 import com.dusk.restaurant.client.dto.ErrorDto;
 import com.dusk.restaurant.exception.GenericException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -31,29 +30,32 @@ public class RestClient {
         return instance;
     }
 
-    public <T, R> Result<R> post(String endpoint, T dto, Class<R> classResponse) throws IOException, InterruptedException {
+    public <T, R> Result<R> post(String endpoint, T dto, Class<R> classResponse)
+            throws IOException, InterruptedException {
+
         String json = this.objectMapper.writeValueAsString(dto);
 
-        HttpRequest request = HttpRequest.newBuilder()
+        HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create(this.baseUrl + endpoint))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(json))
                 .build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        return this.getResult(classResponse, response);
+        return this.getResult(classResponse, httpRequest);
     }
 
-    private <R> Result<R> getResult(Class<R> classResponse,
-                                    HttpResponse<String> response) throws JsonProcessingException {
+    private <R> Result<R> getResult(Class<R> classResponse, HttpRequest httpRequest)
+            throws IOException, InterruptedException {
+
+        HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
         int status = response.statusCode();
         if (status >= 200 && status < 300) {
             R body = this.objectMapper.readValue(response.body(), classResponse);
             return Result.ok(body);
         } else {
-            var body = this.objectMapper.readValue(response.body(), ErrorDto.class);
-            return Result.err(body);
+            var errorDto = this.objectMapper.readValue(response.body(), ErrorDto.class);
+            return Result.err(errorDto);
         }
     }
 
