@@ -61,13 +61,13 @@ public class RestClient {
             HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
             int status = response.statusCode();
-            if (status >= 200 && status < 300) {
-                R body = this.objectMapper.readValue(response.body(), classResponse);
-                return Result.ok(body);
-            } else {
+            if (status < 200 || status >= 300) {
                 var errorDto = this.objectMapper.readValue(response.body(), ErrorDto.class);
                 return Result.err(errorDto);
             }
+
+            R body = this.objectMapper.readValue(response.body(), classResponse);
+            return Result.ok(body);
         } catch (Exception e) {
             e.fillInStackTrace();
             var errorDto = ErrorDto.builder()
