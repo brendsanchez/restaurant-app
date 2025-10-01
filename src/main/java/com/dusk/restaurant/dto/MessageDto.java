@@ -36,7 +36,7 @@ public class MessageDto {
                 .hideAfter(Duration.seconds(5))
                 .position(Pos.BOTTOM_RIGHT);
 
-        if (this.type == AlertType.INFORMATION) {
+        if (AlertType.INFORMATION.equals(this.type)) {
             notification.getStyleClass().add("success");
             notification.showInformation();
         } else {
