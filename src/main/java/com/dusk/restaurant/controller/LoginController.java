@@ -49,7 +49,7 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        var alertDto = this.userService.login(username, password);
-        alertDto.getAlert().showAndWait();
+        var messageDto = this.userService.login(username, password);
+        messageDto.showNotification();
     }
 }
