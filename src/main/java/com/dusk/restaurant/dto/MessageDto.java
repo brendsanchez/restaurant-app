@@ -20,12 +20,12 @@ public class MessageDto {
     private String title;
     private String message;
 
-    public Alert getAlert() {
+    public void showAlert() {
         Alert alert = new Alert(this.type);
         alert.setTitle(this.title);
         alert.setContentText(this.message);
         alert.setHeaderText(null);
-        return alert;
+        alert.showAndWait();
     }
 
     public void showNotification() {
