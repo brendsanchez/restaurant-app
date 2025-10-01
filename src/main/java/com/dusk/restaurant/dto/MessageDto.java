@@ -37,8 +37,10 @@ public class MessageDto {
                 .position(Pos.BOTTOM_RIGHT);
 
         if (this.type == AlertType.INFORMATION) {
+            notification.getStyleClass().add("success");
             notification.showInformation();
         } else {
+            notification.getStyleClass().add("error");
             notification.showError();
         }
     }
